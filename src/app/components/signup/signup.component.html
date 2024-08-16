@@ -1,0 +1,43 @@
+<!-- src/app/components/signup/signup.component.html -->
+<div class="container mt-4">
+    <h2>Signup</h2>
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input id="username" formControlName="username" type="text" class="form-control" />
+        <div *ngIf="signupForm.get('username')?.invalid && (signupForm.get('username')?.dirty || signupForm.get('username')?.touched)" class="text-danger">
+          <div *ngIf="signupForm.get('username')?.errors?.['required']">Username is required.</div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input id="password" formControlName="password" type="password" class="form-control" />
+        <div *ngIf="signupForm.get('password')?.invalid && (signupForm.get('password')?.dirty || signupForm.get('password')?.touched)" class="text-danger">
+          <div *ngIf="signupForm.get('password')?.errors?.['required']">Password is required.</div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="role" class="form-label">Role</label>
+        <select id="role" formControlName="role" class="form-control">
+          <option value="user">User</option>
+          <option value="admin">Admin</option>
+        </select>
+        <div *ngIf="signupForm.get('role')?.invalid && (signupForm.get('role')?.dirty || signupForm.get('role')?.touched)" class="text-danger">
+          <div *ngIf="signupForm.get('role')?.errors?.['required']">Role is required.</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary" [disabled]="signupForm.invalid">Signup</button>
+        </div>
+        <div class="col-auto">
+          <button  class="btn btn-primary" [routerLink]="['/login']" >Login</button>
+        </div>
+      </div>
+      <div *ngIf="errorMessage" class="text-danger mt-2">{{ errorMessage }}</div>
+      
+
+    </form>
+  </div>
+  

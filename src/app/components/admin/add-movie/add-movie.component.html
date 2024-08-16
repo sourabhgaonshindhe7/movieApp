@@ -1,0 +1,40 @@
+<!-- src/app/components/movie-form/movie-form.component.html -->
+<div class="container mt-4">
+  <h2>{{ movieId ? 'Edit Movie' : 'Add Movie' }}</h2>
+  <form [formGroup]="movieForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input id="title" formControlName="title" type="text" class="form-control" />
+      <div *ngIf="movieForm.get('title')?.invalid && (movieForm.get('title')?.dirty || movieForm.get('title')?.touched)" class="text-danger">
+        <div *ngIf="movieForm.get('title')?.errors?.['required']">Title is required.</div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="castMember" class="form-label">Cast Member</label>
+      <input id="castMember" formControlName="castMember" type="text" class="form-control" />
+      <div *ngIf="movieForm.get('castMember')?.invalid && (movieForm.get('castMember')?.dirty || movieForm.get('castMember')?.touched)" class="text-danger">
+        <div *ngIf="movieForm.get('castMember')?.errors?.['required']">Cast Member is required.</div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="genre" class="form-label">Genre</label>
+      <input id="genre" formControlName="genre" type="text" class="form-control" />
+      <div *ngIf="movieForm.get('genre')?.invalid && (movieForm.get('genre')?.dirty || movieForm.get('genre')?.touched)" class="text-danger">
+        <div *ngIf="movieForm.get('genre')?.errors?.['required']">Genre is required.</div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="releaseYear" class="form-label">Release Year</label>
+      <input id="releaseYear" formControlName="releaseYear" type="number" class="form-control" />
+      <div *ngIf="movieForm.get('releaseYear')?.invalid && (movieForm.get('releaseYear')?.dirty || movieForm.get('releaseYear')?.touched)" class="text-danger">
+        <div *ngIf="movieForm.get('releaseYear')?.errors?.['required']">Release Year is required.</div>
+        <div *ngIf="movieForm.get('releaseYear')?.errors?.['min']">Release Year must be at least 1800.</div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="publishReview" class="form-label">Publish Review</label>
+      <input id="publishReview" formControlName="publishReview" type="checkbox" class="form-check-input" />
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="movieForm.invalid">{{ movieId ? 'Update' : 'Add' }} Movie</button>
+  </form>
+</div>

@@ -1,0 +1,35 @@
+<!-- src/app/components/login/login.component.html -->
+<div class="container mt-4">
+    <h2>Login</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input id="username" formControlName="username" type="text" class="form-control" />
+        <div *ngIf="loginForm.get('username')?.invalid && (loginForm.get('username')?.dirty || loginForm.get('username')?.touched)" class="text-danger">
+          <div *ngIf="loginForm.get('username')?.errors?.['required']">Username is required.</div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input id="password" formControlName="password" type="password" class="form-control" />
+        <div *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)" class="text-danger">
+          <div *ngIf="loginForm.get('password')?.errors?.['required']">Password is required.</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Login</button>
+        </div>
+        <div class="col-auto">
+          <button class="btn btn-primary" [routerLink]="['/signup']">Signup</button>
+        </div>
+      </div>
+      <div *ngIf="errorMessage" class="text-danger mt-2">{{ errorMessage }}</div>
+      
+
+      
+
+    </form>
+  </div>
+  

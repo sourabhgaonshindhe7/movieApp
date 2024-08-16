@@ -1,0 +1,52 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Movie List</h2>
+    <button class="btn btn-danger" (click)="logout()">Logout</button>
+  </div>
+  <a routerLink="/movie/add" class="btn btn-primary mb-3">Add Movie</a>
+  
+  <div class="mb-3">
+    <input type="text" [(ngModel)]="filter.title" placeholder="Filter by Title" class="form-control mb-2">
+    <input type="text" [(ngModel)]="filter.castMember" placeholder="Filter by Cast Member" class="form-control mb-2">
+    <input type="text" [(ngModel)]="filter.genre" placeholder="Filter by Genre" class="form-control mb-2">
+    <input type="number" [(ngModel)]="filter.releaseYear" placeholder="Filter by Release Year" class="form-control mb-2">
+  </div>
+  
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered table-hover">
+      <thead>
+        <tr>
+          <th (click)="sortBy('title')">
+            Title 
+            <i *ngIf="sortColumn === 'title'" class="fas" [ngClass]="{'fa-sort-up': sortDirection === 'asc', 'fa-sort-down': sortDirection === 'desc'}"></i>
+          </th>
+          <th (click)="sortBy('Cast Member')">
+            Cast Member 
+            <i *ngIf="sortColumn === 'Cast Member'" class="fas" [ngClass]="{'fa-sort-up': sortDirection === 'asc', 'fa-sort-down': sortDirection === 'desc'}"></i>
+          </th>
+          <th (click)="sortBy('genre')">
+            Genre 
+            <i *ngIf="sortColumn === 'genre'" class="fas" [ngClass]="{'fa-sort-up': sortDirection === 'asc', 'fa-sort-down': sortDirection === 'desc'}"></i>
+          </th>
+          <th (click)="sortBy('releaseYear')">
+            Release Year 
+            <i *ngIf="sortColumn === 'releaseYear'" class="fas" [ngClass]="{'fa-sort-up': sortDirection === 'asc', 'fa-sort-down': sortDirection === 'desc'}"></i>
+          </th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let movie of filteredAndSortedMovies">
+          <td>{{ movie.title }}</td>
+          <td>{{ movie.castMember }}</td>
+          <td>{{ movie.genre }}</td>
+          <td>{{ movie.releaseYear }}</td>
+          <td>
+            <a [routerLink]="['/movie/edit', movie.id]" class="btn btn-sm btn-warning">Edit</a>
+            <button (click)="deleteMovie(movie.id)" class="btn btn-sm btn-danger">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

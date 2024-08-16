@@ -1,0 +1,10 @@
+.star-rating {
+    display: inline-block;
+  }
+  .star-rating .fa {
+    font-size: 1.5em;
+    color: #ffca28;
+    cursor: pointer;
+    margin-right: 0.1em;
+  }
+  

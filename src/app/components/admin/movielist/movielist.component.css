@@ -1,0 +1,37 @@
+/* Ensure table takes full width on small screens */
+.table-responsive {
+    overflow-x: auto;
+  }
+  
+  /* Adjust table for small devices */
+  @media (max-width: 576px) {
+    .table thead {
+      display: none;
+    }
+    .table tbody td {
+      display: block;
+      width: 100%;
+      text-align: right;
+    }
+    .table tbody td::before {
+      content: attr(data-label);
+      float: left;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+    .table tbody tr {
+      margin-bottom: 1rem;
+      display: block;
+      border-bottom: 2px solid #dee2e6;
+    }
+    .table tbody tr:last-child {
+      margin-bottom: 0;
+      border-bottom: none;
+    }
+  }
+  
+  /* Additional margin for pagination */
+  .pagination {
+    margin-top: 1rem;
+  }
+  

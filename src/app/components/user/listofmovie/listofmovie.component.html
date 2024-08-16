@@ -1,0 +1,60 @@
+<div class="container mt-4">
+    <div class="row mb-3">
+      <div class="col-6 col-md-8">
+        <h2>Movie List</h2>
+      </div>
+      <div class="col-6 col-md-4 text-end">
+        <button class="btn btn-danger" (click)="logout()">Logout</button>
+      </div>
+    </div>
+  
+  
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Cast Member</th>
+            <th>Genre</th>
+            <th>Release Year</th>
+            <th>Likes</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let movie of movies">
+            <td>{{ movie.title }}</td>
+            <td>{{ movie.castMember }}</td>
+            <td>{{ movie.genre }}</td>
+            <td>{{ movie.releaseYear }}</td>
+            <td>{{ movie?.likes ? movie?.likes : 0 }}</td>
+
+            <td>
+
+              <button
+              class="btn btn-success me-2"
+              [attr.disabled]="!movie.publishReview ? true : null"
+              (click)="likeMovie(movie.id)"
+            >
+              Like
+            </button>
+
+              <button
+              class="btn btn-info me-2"
+              [attr.disabled]="!movie.publishReview ? true : null"
+              (click)="openCommentModal(movie.id)"
+            >
+              Add Comment
+            </button>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <app-movie-comment
+      *ngIf="selectedMovieId"
+      [movieId]="selectedMovieId"
+      (commentAdded)="fetchMovies()"
+    ></app-movie-comment>
+  </div>
+  

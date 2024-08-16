@@ -1,0 +1,46 @@
+<div class="mt-4">
+    <h4>Comments</h4>
+    <form [formGroup]="commentForm" (ngSubmit)="addComment()">
+      <div class="mb-3">
+        <label for="comment" class="form-label">Comment</label>
+        <textarea id="comment" formControlName="comment" class="form-control"></textarea>
+        <div *ngIf="commentForm.get('comment')?.invalid && (commentForm.get('comment')?.dirty || commentForm.get('comment')?.touched)"
+          class="text-danger">
+          <div *ngIf="commentForm.get('comment')?.errors?.['required']">Comment is required.</div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="rating" class="form-label">Rating</label>
+        <div id="rating" class="star-rating">
+          <ng-container *ngFor="let star of stars; let i = index">
+            <i class="fa" [ngClass]="{
+                  'fa-star': commentForm.get('star')?.value >= i + 1,
+                  'fa-star-o': commentForm.get('star')?.value < i + 1
+                }" (click)="setRating(i + 1)">
+            </i>
+          </ng-container>
+        </div>
+        <div *ngIf="commentForm.get('star')?.invalid && (commentForm.get('star')?.dirty || commentForm.get('star')?.touched)"
+          class="text-danger">
+          <div *ngIf="commentForm.get('star')?.errors?.['required']">Rating is required.</div>
+          <div *ngIf="commentForm.get('star')?.errors?.['min']">Rating must be at least 1.</div>
+          <div *ngIf="commentForm.get('star')?.errors?.['max']">Rating cannot be more than 5.</div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="commentForm.invalid">Submit</button>
+    </form>
+    <div *ngFor="let comment of movie.comments" class="mt-3">
+        <p> Name :-  {{comment.user}}</p>
+      <p> Comment :- {{ comment.comment }}</p>
+      <div class="star-rating">
+        <ng-container *ngFor="let star of stars; let i = index">
+          <i class="fa" [ngClass]="{
+                'fa-star': comment.star >= i + 1,
+                'fa-star-o': comment.star < i + 1
+              }">
+          </i>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  
